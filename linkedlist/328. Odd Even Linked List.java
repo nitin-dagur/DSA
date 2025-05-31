@@ -1,0 +1,27 @@
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        ListNode odd = new ListNode(0);
+        ListNode even = new ListNode(0);
+
+        ListNode tempo = odd;
+        ListNode tempe = even;
+
+        ListNode temp = head;
+        while(temp != null){
+            tempo.next=temp;
+            temp=temp.next;
+            tempo = tempo.next;
+
+            tempe.next = temp;
+            if(temp==null) break;
+            temp=temp.next;
+            tempe = tempe.next;
+        }
+        even=even.next;
+        odd=odd.next;
+
+        tempo.next=even;
+        return odd;
+        
+    }
+}
