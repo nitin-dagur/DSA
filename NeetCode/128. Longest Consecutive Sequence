@@ -1,0 +1,37 @@
+import java.util.HashSet;
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        // Edge case: if the array is empty, return 0
+        if (nums.length == 0) return 0;
+
+        // Use a HashSet for O(1) lookups
+        HashSet<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num); // Add all elements to the set
+        }
+
+        int maxlength = 1; // To track the length of the longest sequence
+
+        // Loop through each number in the set
+        for (int num : set) {
+            // Only start counting if it's the beginning of a sequence
+            if (!set.contains(num - 1)) {
+                int count = 1;       // Start of new sequence
+                int current = num;   // Current number in the sequence
+
+                // Check for the next consecutive numbers
+                while (set.contains(current + 1)) {
+                    current++;  // Move to the next number
+                    count++;    // Increase sequence length
+                }
+
+                // Update the maximum length found so far
+                maxlength = Math.max(maxlength, count);
+            }
+        }
+
+        // Return the length of the longest consecutive sequence
+        return maxlength;
+    }
+}
